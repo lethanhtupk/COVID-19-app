@@ -18,6 +18,10 @@
   padding: 0.5rem;
 }
 
+.selected__row {
+  border: 5px solid greenyellow;
+}
+
 .table tr:nth-of-type(odd) {
   background-color: #f3f2f8;
 }

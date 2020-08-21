@@ -2,9 +2,9 @@ import React from 'react';
 import './Table.css';
 import numeral from 'numeral';
 
-function Table ({countries}) {
+function Table ({countries, countryName}) {
   return (
-    <div className="table">
+    <div className="table" id="rankingTable">
       <table>
         <tbody>
         <tr>
@@ -14,7 +14,7 @@ function Table ({countries}) {
         </tr>
         {
           countries.map(({country, cases}, index) => (
-              <tr key={index}>
+              <tr key={index} id={country} className={`${countryName === country && 'selected__row'}`}>
                 <td>{index+1}</td>
                 <td>{country}</td>
                 <td>{numeral(cases).format(0,0)}</td>

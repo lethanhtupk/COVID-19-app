@@ -24,18 +24,18 @@ const casesTypeColors = {
   },
 };
 
-export const sortData = (data) => {
-  const sortedData = [...data]
+// export const sortData = (data) => {
+//   const sortedData = [...data]
 
-  sortedData.sort((a,b) => {
-    if (a.active > b.active) {
-      return -1;
-    } else {
-      return 1;
-    }
-  })
-  return sortedData;
-}
+//   sortedData.sort((a,b) => {
+//     if (a.active > b.active) {
+//       return -1;
+//     } else {
+//       return 1;
+//     }
+//   })
+//   return sortedData;
+// }
 
 export const prettyPrintStat = (stat) => {
   if (stat < 1000) {
@@ -47,6 +47,7 @@ export const prettyPrintStat = (stat) => {
 }
 
 export const showDataOnMap = (data, casesType) => {
+  
   return data.map((country, index) => (
     <Circle
       key={index}
@@ -66,13 +67,13 @@ export const showDataOnMap = (data, casesType) => {
         ></div>
         <div className="info-name">{country.country}</div>
         <div className="info-confirmed">
-          Cases: {numeral(country.cases).format("0.0a")}
+          Cases: {prettyPrintStat(country.cases)}
         </div>
         <div className="info-recovered">
-          Recovered: {numeral(country.recovered).format("0.0a")}
+          Recovered: {prettyPrintStat(country.recovered)}
         </div>
         <div className="info-deaths">
-          Deaths: {numeral(country.deaths).format("0.0a")}
+          Deaths: {prettyPrintStat(country.deaths)}
         </div>
       </div>
     </Popup>

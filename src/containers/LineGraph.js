@@ -43,22 +43,9 @@ class LineGraph extends Component {
   render () {
     const dataChart = this.buildChartData(this.state.graphData, this.props.casesType);
     const dates = dataChart[1];
-    const cases = dataChart[0]
+    const cases = dataChart[0];
     const finalData = {
       labels: dates,
-      options: {
-        scales: {
-          xAxes: [{
-            type: 'time',
-            time: {
-                unit: 'day',
-                displayFormats: {
-                  day:'MMM D'
-                }
-            }
-        }]
-        }
-      },
       datasets: [
         {
           label: this.props.typeChart.label,
@@ -81,14 +68,39 @@ class LineGraph extends Component {
           pointHitRadius: 10,
           data: cases
         }
-      ]
+      ],
+    }
+    const config = {
+      scales: {
+        xAxes: [{
+          unit: 'day',
+          type: 'time', 
+          displayFormat: {
+            'day': "MMM DD",
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            callback: function(value, index, values) {
+                return value/1000 + "K";
+            }
+          }
+        }]
+    },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return tooltipItem.yLabel/1000 + ' K';
+          }
+        }
+      }
     }
     const style = {
       "marginTop": "20px",
     }
     return (
       <div style={style}>
-        <Line data={finalData} />
+        <Line data={finalData} options={config} />
       </div>
     )
   }

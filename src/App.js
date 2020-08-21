@@ -128,9 +128,20 @@ class App extends Component {
       await this.setState({
         country: newValue
       });
-      await this.searchByCountry(this.state.country)
+      await this.searchByCountry(this.state.country);
+      const elm = document.getElementById(this.state.country);
+      if(elm !== null) {
+        elm.scrollIntoView(true);
+      }
     }
   };
+
+  // handleKeyPressed = (e) => {
+  //   if (e.keyCode === 13) {
+  //     console.log("Enter key was hit!");
+      
+  //   }
+  // }
 
   render () {
     const casesType = this.state.casesType;
@@ -196,7 +207,7 @@ class App extends Component {
         <Card className="app__right">
           <CardContent>
             <h3>Total Cases By Country</h3>
-            <Table countries={this.state.tableData} /> 
+            <Table countries={this.state.tableData} countryName={this.state.country} /> 
             <h3>{this.casesTypeDepend[casesType].label}</h3>
             <LineGraph 
               casesType={casesType}
