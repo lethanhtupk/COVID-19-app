@@ -6,6 +6,16 @@ body {
   background-color: #f5f6fa;
 }
 
+.search__icon {
+  cursor: pointer;
+}
+
+.update_time {
+  color: #2b2b2c;
+  font-size: 15px;
+  font-weight: 50;
+}
+
 .app {
   display: flex;
   justify-content: space-evenly;
@@ -25,7 +35,7 @@ body {
   justify-content: space-between;
 }
 
-.app__dropdown {
+.search_bar {
   background-color: white;
 }
 
