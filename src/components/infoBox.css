@@ -1,6 +1,7 @@
 .infoBox {
   flex: 1;
   cursor: pointer;
+  border-top: 10px solid white;
   /* border-top: 10px solid white; */
 }
 

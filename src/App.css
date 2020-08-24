@@ -37,6 +37,7 @@ body {
 
 .search_bar {
   background-color: white;
+  float: left;
 }
 
 .app__left {

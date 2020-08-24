@@ -4,7 +4,8 @@ import './App.css';
 import {
   CardContent,
   Card,
-  TextField
+  TextField,
+  Grid
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import InfoBox from './components/infoBox';
@@ -139,75 +140,102 @@ class App extends Component {
   render () {
     const casesType = this.state.casesType;
     return (
-      <div className="app">
+      <Grid container className="app" spacing={1}>
 
-        <div className="app__left">
+        <Grid item xs={12} sm={12} md={7} lg={9} className="app__left">
 
-          <div className="app_header">
+          <Grid container direction="column" spacing={1}>
 
-            <h1>
-              COVID-19 Tracker
-              <p className="update_time">Số liệu ngày   : {this.handleUpdatedTime(this.state.updated).info}</p>
-              <p className="update_time">Update lần cuối: {this.handleUpdatedTime(this.state.updated).update}</p>
-            </h1>
+            <Grid item className="app_header" justify="space-between">
 
-            
-            <Autocomplete
-              className="search_bar"
-              value={this.state.country}
-              onChange={this.onChangeCountry}
-              options={this.state.countries}
-              style={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Country" variant="outlined"/>}
-            />
-  
+              <Grid container spacing={2}>
 
-          </div>
+                <Grid item xs={12} sm={7} lg={9}>
+                  <h1>
+                    COVID-19 Tracker
+                    <p className="update_time">Số liệu ngày   : {this.handleUpdatedTime(this.state.updated).info}</p>
+                    <p className="update_time">Update lần cuối: {this.handleUpdatedTime(this.state.updated).update}</p>
+                  </h1>
+                </Grid>
+
+                <Grid item xs={12} sm={5} lg={3}>
+                  <Autocomplete
+                    className="search_bar"
+                    value={this.state.country}
+                    onChange={this.onChangeCountry}
+                    options={this.state.countries}
+                    style={{width: "100%"}}
+                    renderInput={(params) => <TextField {...params} label="Country" variant="outlined"/>}
+                  />
+                </Grid>
+              
+              </Grid>
+
+            </Grid>
           
-          <div className="app__stats">
-            <InfoBox 
-              active={this.state.casesType === 'cases'}
-              title="Corona virus Cases" 
-              casesType="cases"
-              isRed
-              cases={prettyPrintStat(this.state.countryInfo.todayCases)} 
-              total={numeral(this.state.countryInfo.cases).format(0,0)}
-              onClick={this.onChangeCasesType} />
-              <InfoBox
-              title="Recovered"
-              active={this.state.casesType === 'recovered'}
-              casesType="recovered" 
-              cases={prettyPrintStat(this.state.countryInfo.todayRecovered)} 
-              total={numeral(this.state.countryInfo.recovered).format(0,0)}
-              onClick={this.onChangeCasesType} />
-            <InfoBox
-              isRed
-              title="Deaths" 
-              active={this.state.casesType === 'deaths'}
-              casesType="deaths"
-              cases={prettyPrintStat(this.state.countryInfo.todayDeaths)} 
-              total={numeral(this.state.countryInfo.deaths).format(0,0)}
-              onClick={this.onChangeCasesType} />
-          </div>
+            <Grid item className="app__stats">
 
-          <WorldMap 
-            center={this.state.center} 
-            zoom={this.state.zoom} 
-            countries={this.state.mapCountries}
-            casesType={this.state.casesType}/>
-        </div>
+              <Grid container spacing={2}>
 
-        <Card className="app__right">
-          <CardContent>
-            <Table countries={this.state.tableData} countryName={this.state.country} /> 
-            <h3>{this.casesTypeDepend[casesType].label}</h3>
-            <LineGraph 
-              casesType={casesType}
-              typeChart={this.casesTypeDepend[casesType]} />
-          </CardContent>
-        </Card>
+                <Grid item xs={12} sm={4}>
+                  <InfoBox 
+                  active={this.state.casesType === 'cases'}
+                  title="Corona virus Cases" 
+                  casesType="cases"
+                  isRed
+                  cases={prettyPrintStat(this.state.countryInfo.todayCases)} 
+                  total={numeral(this.state.countryInfo.cases).format(0,0)}
+                  onClick={this.onChangeCasesType} />
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <InfoBox
+                  title="Recovered"
+                  active={this.state.casesType === 'recovered'}
+                  casesType="recovered" 
+                  cases={prettyPrintStat(this.state.countryInfo.todayRecovered)} 
+                  total={numeral(this.state.countryInfo.recovered).format(0,0)}
+                  onClick={this.onChangeCasesType} />
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <InfoBox
+                  isRed
+                  title="Deaths" 
+                  active={this.state.casesType === 'deaths'}
+                  casesType="deaths"
+                  cases={prettyPrintStat(this.state.countryInfo.todayDeaths)} 
+                  total={numeral(this.state.countryInfo.deaths).format(0,0)}
+                  onClick={this.onChangeCasesType} />
+                </Grid>
+
+              </Grid>
+
+            </Grid>
+
+            <Grid item className="map">
+              <WorldMap 
+              center={this.state.center} 
+              zoom={this.state.zoom} 
+              countries={this.state.mapCountries}
+              casesType={this.state.casesType}/>
+            </Grid>
+          </Grid>
+        </Grid> 
+
+        <Grid item xs={12} sm={12} md={5} lg={3}>
+          <Card className="app__right">
+            <CardContent>
+              <Table countries={this.state.tableData} countryName={this.state.country} /> 
+              <h3>{this.casesTypeDepend[casesType].label}</h3>
+              <LineGraph 
+                casesType={casesType}
+                typeChart={this.casesTypeDepend[casesType]} />
+            </CardContent>
+          </Card>
+        </Grid>
         
-      </div>
+      </Grid>
     );
   }
 }

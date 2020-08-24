@@ -5,7 +5,7 @@ import './infoBox.css';
 function infoBox(props) {
   return (
     <Card 
-      className={`infoBox ${props.active && 'infoBox--selected'} ${props.isRed && 'infoBox--red'}`} 
+      className={`infoBox ${props.active && 'infoBox--selected'} ${props.active && props.isRed && 'infoBox--red'}`} 
       onClick={() =>{props.onClick(props.casesType)}}>
       <CardContent>
         <Typography className="infoBox__title" color="textSecondary">
