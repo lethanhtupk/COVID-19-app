@@ -4,6 +4,7 @@
 
 body {
   background-color: #f5f6fa;
+  overflow-x: hidden;
 }
 
 .search__icon {
@@ -40,9 +41,6 @@ body {
   float: left;
 }
 
-.app__left {
-  flex: 0.9;
-}
 
 @media(max-width: 990px) {
   .app {
