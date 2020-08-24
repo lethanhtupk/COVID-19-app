@@ -136,13 +136,6 @@ class App extends Component {
     }
   };
 
-  // handleKeyPressed = (e) => {
-  //   if (e.keyCode === 13) {
-  //     console.log("Enter key was hit!");
-      
-  //   }
-  // }
-
   render () {
     const casesType = this.state.casesType;
     return (
@@ -206,7 +199,6 @@ class App extends Component {
 
         <Card className="app__right">
           <CardContent>
-            <h3>Total Cases By Country</h3>
             <Table countries={this.state.tableData} countryName={this.state.country} /> 
             <h3>{this.casesTypeDepend[casesType].label}</h3>
             <LineGraph 

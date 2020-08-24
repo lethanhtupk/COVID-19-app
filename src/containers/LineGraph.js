@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
+import moment from 'moment';
 
 class LineGraph extends Component {
 
@@ -42,7 +43,7 @@ class LineGraph extends Component {
 
   render () {
     const dataChart = this.buildChartData(this.state.graphData, this.props.casesType);
-    const dates = dataChart[1];
+    const dates = dataChart[1].map(date => moment(new Date(date)).format('YYYY-MM-DD'))
     const cases = dataChart[0];
     const finalData = {
       labels: dates,
