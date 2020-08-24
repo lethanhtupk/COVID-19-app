@@ -30,6 +30,12 @@ class Table extends Component {
       if (newValue === 'Australia/Oceania') {
         newValue = 'Australia%2FOceania'
       }
+      if (newValue === 'Worldwide') {
+        this.setState({
+          tableData: this.props.countries
+        });
+        return ;
+      }
       fetch(`https://disease.sh/v3/covid-19/continents/${newValue}?yesterday=true&strict=true`)
       .then(res => res.json())
       .then(data => {
